@@ -41,9 +41,9 @@ pipeline{
                 classifier: '',
                 file: "target/${ArtifactId}-${Version}.war",
                 type: 'war']],
-                credentialsId: '1b7dcbc1-b7d4-4d88-9b72-8e689d89117d',
+                credentialsId: '80648241-7c54-4af1-929e-79812898b6fc',
                 groupId: "${GroupId}",
-                nexusUrl: '3.231.210.116:8081',
+                nexusUrl: '54.144.188.16:8081',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: "${NexusRepo}",
@@ -72,7 +72,7 @@ pipeline{
                     transfers: [
                         sshTransfer(
                                 cleanRemote:false,
-                                execCommand: 'ansible-playbook /home/ansibleadmin/playbook/downloadanddepploy.yaml -i /home/ansibleadmin/playbook/hosts',
+                                execCommand: 'ansible-playbook /home/ansibleadmin/playbook/download-war-deploy-tomcat.yaml -i /home/ansibleadmin/playbook/hosts',
                                 execTimeout: 120000
                         )
                     ],
@@ -82,27 +82,3 @@ pipeline{
                     ])
             }
         }
-
-        // Stage6 : Deploying Build Artifact to Docker
-        stage ('Deploy to Docker'){
-            steps {
-                echo "Deploying ...."
-                sshPublisher(publishers:
-                [sshPublisherDesc(
-                    configName: 'Ansible_Controller',
-                    transfers: [
-                        sshTransfer(
-                                cleanRemote:false,
-                                execCommand: 'ansible-playbook /home/ansibleadmin/playbook/download-deploy-on-docker.yaml -i /home/ansibleadmin/playbook/hosts',
-                                execTimeout: 120000
-                        )
-                    ],
-                    usePromotionTimestamp: false,
-                    useWorkspaceInPromotion: false,
-                    verbose: false)
-                    ])
-            }
-        }
-  }
-
-}
