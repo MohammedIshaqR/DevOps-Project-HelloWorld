@@ -39,7 +39,7 @@ pipeline{
                 nexusArtifactUploader artifacts:
                 [[artifactId: "${ArtifactId}",
                 classifier: '',
-                file: "target/webapp.war",
+                file: "/var/lib/jenkins/workspace/Maven-Project-CI-CD-PipeLine/webapp/target/webapp.war",
                 type: 'war']],
                 credentialsId: '15d632f3-7afc-4e97-b8cd-c3013371bc51',
                 groupId: "${GroupId}",
