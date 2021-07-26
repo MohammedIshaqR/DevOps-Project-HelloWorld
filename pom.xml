@@ -161,9 +161,6 @@
       </plugins>
     </pluginManagement>
   </build>
-  <build>
-    <finalName>${project.artifactId}-${project.version}</finalName>
-  </build>
 
   <dependencyManagement>
     <dependencies>
