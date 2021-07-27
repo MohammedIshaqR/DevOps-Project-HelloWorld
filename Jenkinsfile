@@ -94,7 +94,7 @@ pipeline{
                         sshTransfer(
                                 cleanRemote:false,
                                 execCommand: 'ansible-playbook /home/ansibleadmin/playbook/download-war-deploy-docker.yaml -i /home/ansibleadmin/playbook/hosts',
-                                execTimeout: 150000
+                                execTimeout: 180000
                         )
                     ],
                     usePromotionTimestamp: false,
